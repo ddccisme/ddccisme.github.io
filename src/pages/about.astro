@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<Layout title={`关于本铺 · ${SITE_TITLE}`} description="关于董掌柜的杂货铺和掌柜本人" pubDate={new Date('2026-10-25')}>
+	<h2>🏮 关于本铺</h2>
+	<p>
+		「董掌柜的杂货铺」最早开张于 2016 年 7 月——那时候刚学人家搭博客，用 Hexo
+		架了个铺子，兴致勃勃发了篇 Hello World，然后就……歇业了。
+		<strong>一歇就是十年。</strong>
+	</p>
+	<p>
+		2026 年 10 月，掌柜决定把铺子重新开起来。这次换了个新货架（Astro
+		搭的，比当年的 Hexo 轻快不少），也换了个新规矩：
+		<blockquote>每天打烊前，往货架上添一件新货——当天学到的技术知识，当天沉淀成文章。</blockquote>
+	</p>
+
+	<h2>👨‍💻 关于掌柜</h2>
+	<p>董掌柜，GitHub 网名 <a href="https://github.com/ddccisme">@ddccisme</a>，坐标上海。</p>
+	<ul>
+		<li>职业：大数据 &amp; AI 方向售前工程师，天天跟数据平台、大模型和企业客户打交道</li>
+		<li>日常：写方案、做 POC、讲技术、盘需求，顺便替客户和研发互相翻译</li>
+		<li>信仰：能落地的方案才是好方案，能讲明白的技术才是真懂了</li>
+	</ul>
+	<p>
+		杂货铺里的货都按
+		<code>大数据</code>、<code>AI工程</code>、<code>售前手艺</code>、<code>工具杂货</code>
+		分类摆放，欢迎常来逛。觉得货还不错的话，<a href="/rss.xml">订阅 RSS</a> 不会错过任何一件新货。
+	</p>
+</Layout>

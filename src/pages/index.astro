@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const posts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 5);
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<h1>🏮 董掌柜的杂货铺</h1>
+			<p>
+				<em>「每天打烊前，往货架上添一件新货。」</em>
+			</p>
+			<p>
+				这里是董掌柜的技术杂货铺——开张于 2016 年，歇业十年后于 2026 年重新开张。
+				掌柜是一名大数据 &amp; AI 方向的售前工程师，货架上摆的主要是这几类货：
+			</p>
+			<ul>
+				<li>🗄️ <strong>大数据</strong>：数仓、湖仓一体、分布式数据库这些看家本事</li>
+				<li>🤖 <strong>AI 工程</strong>：大模型、LLMOps、RAG 和企业级 AI 落地</li>
+				<li>💼 <strong>售前手艺</strong>：方案设计、POC 打磨、和客户打交道的经验</li>
+				<li>🛠️ <strong>工具杂货</strong>：顺手的效率工具、脚本和踩坑记录</li>
+			</ul>
+			<p>
+				更新节奏：<strong>每天至少一篇</strong>，当天学到什么就往货架上摆什么。
+				<strong><a href="/blog">去逛货架 →</a></strong>
+			</p>
+
+			<h2>🆕 今日到货</h2>
+			<ul class="recent-posts">
+				{
+					posts.map((post) => (
+						<li>
+							<a href={`/blog/${post.id}/`}>
+								<span class="post-title">{post.data.title}</span>
+								<span class="post-date">
+									<FormattedDate date={post.data.pubDate} />
+								</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	h1 {
+		margin-bottom: 0.3em;
+	}
+	.recent-posts {
+		list-style: none;
+		padding: 0;
+	}
+	.recent-posts li {
+		padding: 0.6em 0;
+		border-bottom: 1px solid rgb(var(--gray-light));
+	}
+	.recent-posts a {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 1em;
+		text-decoration: none;
+	}
+	.recent-posts .post-title {
+		color: rgb(var(--black));
+		font-weight: 600;
+	}
+	.recent-posts .post-date {
+		color: rgb(var(--gray));
+		font-size: 0.8em;
+		white-space: nowrap;
+	}
+	.recent-posts a:hover .post-title {
+		color: var(--accent);
+	}
+</style>
